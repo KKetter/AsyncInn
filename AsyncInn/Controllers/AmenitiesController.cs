@@ -2,10 +2,7 @@
 
 namespace AsyncInn.Controllers
 {
-    /// <summary>
-    /// This method renders the main page on startup
-    /// </summary>
-    public class HomeController: Controller
+    public class AmenitiesController : Controller
     {
         [HttpGet]
         public IActionResult Index()
