@@ -9,6 +9,7 @@ namespace AsyncInn.Models
     public class Amenities
     {
         public int ID { get; set; }
+        [Required]
         public string Name { get; set; }
 
         //Navigation
