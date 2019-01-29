@@ -11,11 +11,13 @@ namespace AsyncInn.Models
     {
         [Key]
         public int HotelID { get; set; }
-        
         public int RoomNumber { get; set; }
+        [Required]
         [ForeignKey("Room")]
         public int RoomID { get; set; }
+        [Required]
         public decimal Rate { get; set; }
+        [Required]
         public bool PetFriendly { get; set; }
 
         //Navigation

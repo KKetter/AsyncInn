@@ -9,9 +9,12 @@ namespace AsyncInn.Models
     public class Hotel
     {
         public int ID { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Address { get; set; }
-        public int Phone { get; set; }
+        [Required]
+        public string Phone { get; set; }
 
         //Navigation
         public ICollection<HotelRoom> HotelRoom { get; set; }

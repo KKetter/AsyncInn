@@ -9,7 +9,9 @@ namespace AsyncInn.Models
     public class Room
     {
         public int ID { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         [EnumDataType(typeof(Layout))]
         public Layout Layout { get; set; }
 

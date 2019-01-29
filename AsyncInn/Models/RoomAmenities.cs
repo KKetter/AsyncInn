@@ -9,8 +9,10 @@ namespace AsyncInn.Models
 {
     public class RoomAmenities
     {
+        [Required]
         [ForeignKey("Amenities")]
         public int AmenitiesID { get; set; }
+        [Required]
         [ForeignKey("Room")]
         public int RoomID { get; set; }
 
