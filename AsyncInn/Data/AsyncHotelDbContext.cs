@@ -53,6 +53,39 @@ namespace AsyncInn.Data
                     Phone = "1234567890"
                 }
                 );
+
+            modelBuilder.Entity<Room>().HasData(
+                new Room
+                {
+                    ID = 1,
+                    Name = "StudioFirstFloor",
+                    Layout = 0,
+                },
+                new Room
+                {
+                    ID = 2,
+                    Name = "StudioSecondFloor",
+                    Layout = 0,
+                },
+                new Room
+                {
+                    ID = 3,
+                    Name = "OneBedroomFirstFloor",
+                    Layout = 1,
+                },
+                new Room
+                {
+                    ID = 4,
+                    Name = "OneBedroomFirstFloor",
+                    Layout = 1,
+                },
+                new Room
+                {
+                    ID = 5,
+                    Name = "One Bed First Floor",
+                    Layout = 2,
+                }
+                );
         }
 
         public DbSet<Hotel> Hotel { get; set; }
