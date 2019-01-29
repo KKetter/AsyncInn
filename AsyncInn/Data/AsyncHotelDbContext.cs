@@ -76,15 +76,50 @@ namespace AsyncInn.Data
                 new Room
                 {
                     ID = 4,
-                    Name = "OneBedroomFirstFloor",
+                    Name = "OneBedroomSecondFloor",
                     Layout = 1,
                 },
                 new Room
                 {
                     ID = 5,
-                    Name = "One Bed First Floor",
+                    Name = "TwoBedroomFirstFloor",
+                    Layout = 2,
+                },
+                new Room
+                {
+                    ID = 6,
+                    Name = "TwoBedroomSecondFloor",
                     Layout = 2,
                 }
+                );
+
+            modelBuilder.Entity<Amenities>().HasData(
+                new Amenities
+                {
+                    ID = 1,
+                    Name = "Phone",
+                },
+                new Amenities
+                {
+                     ID = 2,
+                     Name = "Hot Tub",
+                },
+                new Amenities
+                {
+                     ID = 3,
+                     Name = "Mini Bar",
+                },
+                new Amenities
+                {
+                    ID = 4,
+                    Name = "Coffee",
+                },
+                new Amenities
+                {
+                    ID = 5,
+                    Name = "Dog"
+                }
+
                 );
         }
 
