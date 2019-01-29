@@ -24,10 +24,10 @@ namespace AsyncInn.Models
     public enum Layout
     {
         [Display(Name = "Studio")]
-        Studio = 1,
+        Studio = 0,
         [Display(Name = "One Bedroom")]
-        OneBedroom = 2,
+        OneBedroom = 1,
         [Display(Name = "Two Bedroom")]
-        TwoBedroom,
+        TwoBedroom = 2,
     }
 }
