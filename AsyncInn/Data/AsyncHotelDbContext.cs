@@ -59,37 +59,37 @@ namespace AsyncInn.Data
                 {
                     ID = 1,
                     Name = "StudioFirstFloor",
-                    Layout = 0,
+                    Layout = Layout.Studio,
                 },
                 new Room
                 {
                     ID = 2,
                     Name = "StudioSecondFloor",
-                    Layout = 0,
+                    Layout = Layout.Studio,
                 },
                 new Room
                 {
                     ID = 3,
                     Name = "OneBedroomFirstFloor",
-                    Layout = 1,
+                    Layout = Layout.OneBedroom,
                 },
                 new Room
                 {
                     ID = 4,
                     Name = "OneBedroomSecondFloor",
-                    Layout = 1,
+                    Layout = Layout.OneBedroom,
                 },
                 new Room
                 {
                     ID = 5,
                     Name = "TwoBedroomFirstFloor",
-                    Layout = 2,
+                    Layout = Layout.TwoBedroom,
                 },
                 new Room
                 {
                     ID = 6,
                     Name = "TwoBedroomSecondFloor",
-                    Layout = 2,
+                    Layout = Layout.TwoBedroom,
                 }
                 );
 
