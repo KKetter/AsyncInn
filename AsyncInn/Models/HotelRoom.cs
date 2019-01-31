@@ -9,7 +9,6 @@ namespace AsyncInn.Models
 {
     public class HotelRoom
     {
-        [Key]
         public int HotelID { get; set; }
         public int RoomNumber { get; set; }
         [Required]

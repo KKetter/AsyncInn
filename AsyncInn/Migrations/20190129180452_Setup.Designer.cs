@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AsyncInn.Migrations
 {
     [DbContext(typeof(AsyncInnDbContext))]
-    [Migration("20190129064641_AmenitiesCreate")]
-    partial class AmenitiesCreate
+    [Migration("20190129180452_Setup")]
+    partial class Setup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,33 @@ namespace AsyncInn.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Amenities");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Name = "Phone"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Name = "Hot Tub"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Name = "Mini Bar"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Name = "Coffee"
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Name = "Dog"
+                        });
                 });
 
             modelBuilder.Entity("AsyncInn.Models.Hotel", b =>
@@ -52,6 +79,43 @@ namespace AsyncInn.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Hotel");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Address = "1 Main Street",
+                            Name = "Seattle",
+                            Phone = "1234567890"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Address = "1 Horse",
+                            Name = "Boise",
+                            Phone = "1234567890"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Address = "1 Deeze Street",
+                            Name = "Eugene",
+                            Phone = "1234567890"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Address = "100 Here Street",
+                            Name = "Los Angeles",
+                            Phone = "1234567890"
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Address = "1 Landing Street",
+                            Name = "Moon",
+                            Phone = "1234567890"
+                        });
                 });
 
             modelBuilder.Entity("AsyncInn.Models.HotelRoom", b =>
@@ -60,8 +124,6 @@ namespace AsyncInn.Migrations
 
                     b.Property<int>("RoomNumber");
 
-                    b.Property<int>("HotelID1");
-
                     b.Property<bool>("PetFriendly");
 
                     b.Property<decimal>("Rate");
@@ -69,10 +131,6 @@ namespace AsyncInn.Migrations
                     b.Property<int>("RoomID");
 
                     b.HasKey("HotelID", "RoomNumber");
-
-                    b.HasAlternateKey("HotelID");
-
-                    b.HasIndex("HotelID1");
 
                     b.HasIndex("RoomID")
                         .IsUnique();
@@ -94,6 +152,44 @@ namespace AsyncInn.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Room");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Layout = 0,
+                            Name = "StudioFirstFloor"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Layout = 0,
+                            Name = "StudioSecondFloor"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Layout = 1,
+                            Name = "OneBedroomFirstFloor"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Layout = 1,
+                            Name = "OneBedroomSecondFloor"
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Layout = 2,
+                            Name = "TwoBedroomFirstFloor"
+                        },
+                        new
+                        {
+                            ID = 6,
+                            Layout = 2,
+                            Name = "TwoBedroomSecondFloor"
+                        });
                 });
 
             modelBuilder.Entity("AsyncInn.Models.RoomAmenities", b =>
@@ -113,7 +209,7 @@ namespace AsyncInn.Migrations
                 {
                     b.HasOne("AsyncInn.Models.Hotel", "Hotel")
                         .WithMany("HotelRoom")
-                        .HasForeignKey("HotelID1")
+                        .HasForeignKey("HotelID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("AsyncInn.Models.Room", "Room")

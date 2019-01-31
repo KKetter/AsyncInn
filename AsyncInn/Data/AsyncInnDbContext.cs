@@ -59,32 +59,67 @@ namespace AsyncInn.Data
                 {
                     ID = 1,
                     Name = "StudioFirstFloor",
-                    Layout = 0,
+                    Layout = Layout.Studio,
                 },
                 new Room
                 {
                     ID = 2,
                     Name = "StudioSecondFloor",
-                    Layout = 0,
+                    Layout = Layout.Studio,
                 },
                 new Room
                 {
                     ID = 3,
                     Name = "OneBedroomFirstFloor",
-                    Layout = 1,
+                    Layout = Layout.OneBedroom,
                 },
                 new Room
                 {
                     ID = 4,
-                    Name = "OneBedroomFirstFloor",
-                    Layout = 1,
+                    Name = "OneBedroomSecondFloor",
+                    Layout = Layout.OneBedroom,
                 },
                 new Room
                 {
                     ID = 5,
-                    Name = "One Bed First Floor",
-                    Layout = 2,
+                    Name = "TwoBedroomFirstFloor",
+                    Layout = Layout.TwoBedroom,
+                },
+                new Room
+                {
+                    ID = 6,
+                    Name = "TwoBedroomSecondFloor",
+                    Layout = Layout.TwoBedroom,
                 }
+                );
+
+            modelBuilder.Entity<Amenities>().HasData(
+                new Amenities
+                {
+                    ID = 1,
+                    Name = "Phone",
+                },
+                new Amenities
+                {
+                     ID = 2,
+                     Name = "Hot Tub",
+                },
+                new Amenities
+                {
+                     ID = 3,
+                     Name = "Mini Bar",
+                },
+                new Amenities
+                {
+                    ID = 4,
+                    Name = "Coffee",
+                },
+                new Amenities
+                {
+                    ID = 5,
+                    Name = "Dog"
+                }
+
                 );
         }
 

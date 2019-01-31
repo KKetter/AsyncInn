@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AsyncInn.Migrations
 {
-    public partial class AsyncInnDb : Migration
+    public partial class Setup : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace AsyncInn.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -26,9 +26,9 @@ namespace AsyncInn.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Address = table.Column<string>(nullable: true),
-                    Phone = table.Column<int>(nullable: false)
+                    Name = table.Column<string>(nullable: false),
+                    Address = table.Column<string>(nullable: false),
+                    Phone = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,7 +41,7 @@ namespace AsyncInn.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
                     Layout = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -57,16 +57,14 @@ namespace AsyncInn.Migrations
                     RoomNumber = table.Column<int>(nullable: false),
                     RoomID = table.Column<int>(nullable: false),
                     Rate = table.Column<decimal>(nullable: false),
-                    PetFriendly = table.Column<bool>(nullable: false),
-                    HotelID1 = table.Column<int>(nullable: false)
+                    PetFriendly = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_HotelRoom", x => new { x.HotelID, x.RoomNumber });
-                    table.UniqueConstraint("AK_HotelRoom_HotelID", x => x.HotelID);
                     table.ForeignKey(
-                        name: "FK_HotelRoom_Hotel_HotelID1",
-                        column: x => x.HotelID1,
+                        name: "FK_HotelRoom_Hotel_HotelID",
+                        column: x => x.HotelID,
                         principalTable: "Hotel",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
@@ -102,10 +100,42 @@ namespace AsyncInn.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_HotelRoom_HotelID1",
-                table: "HotelRoom",
-                column: "HotelID1");
+            migrationBuilder.InsertData(
+                table: "Amenities",
+                columns: new[] { "ID", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Phone" },
+                    { 2, "Hot Tub" },
+                    { 3, "Mini Bar" },
+                    { 4, "Coffee" },
+                    { 5, "Dog" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Hotel",
+                columns: new[] { "ID", "Address", "Name", "Phone" },
+                values: new object[,]
+                {
+                    { 1, "1 Main Street", "Seattle", "1234567890" },
+                    { 2, "1 Horse", "Boise", "1234567890" },
+                    { 3, "1 Deeze Street", "Eugene", "1234567890" },
+                    { 4, "100 Here Street", "Los Angeles", "1234567890" },
+                    { 5, "1 Landing Street", "Moon", "1234567890" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Room",
+                columns: new[] { "ID", "Layout", "Name" },
+                values: new object[,]
+                {
+                    { 1, 0, "StudioFirstFloor" },
+                    { 2, 0, "StudioSecondFloor" },
+                    { 3, 1, "OneBedroomFirstFloor" },
+                    { 4, 1, "OneBedroomSecondFloor" },
+                    { 5, 2, "TwoBedroomFirstFloor" },
+                    { 6, 2, "TwoBedroomSecondFloor" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_HotelRoom_RoomID",

@@ -15,9 +15,13 @@ Add/Create/Delete Rooms to include adding Amentities, Room Layouts, and Rates.
 
 Add/Create/Delete Hotels to include with basic information such as Name, Address, Phone Number.
 
-Add/Create/Delete 
+Add/Create/Delete Amenities
+
+Assign Amenties to Specific Rooms
+
+Assign Rooms to Hotels
 
 ##Output
 []
 
-##API??
+##API

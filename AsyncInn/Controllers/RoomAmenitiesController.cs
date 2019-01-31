@@ -49,8 +49,8 @@ namespace AsyncInn.Controllers
         // GET: RoomAmenities/Create
         public IActionResult Create()
         {
-            ViewData["AmenitiesID"] = new SelectList(_context.Amenities, "ID", "ID");
-            ViewData["RoomID"] = new SelectList(_context.Room, "ID", "ID");
+            ViewData["AmenitiesID"] = new SelectList(_context.Amenities, "ID", "Name");
+            ViewData["RoomID"] = new SelectList(_context.Room, "ID", "Name");
             return View();
         }
 
@@ -73,14 +73,17 @@ namespace AsyncInn.Controllers
         }
 
         // GET: RoomAmenities/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? AmenitiesID, int? RoomID)
         {
-            if (id == null)
+            if (RoomID == null && AmenitiesID == null)
             {
                 return NotFound();
             }
 
-            var roomAmenities = await _context.RoomAmenities.FindAsync(id);
+            var roomAmenities = await _context.RoomAmenities
+                .Include(h => h.Amenities)
+                .Include(h => h.Room)
+                .FirstOrDefaultAsync(m => m.AmenitiesID == AmenitiesID && m.RoomID == RoomID);
             if (roomAmenities == null)
             {
                 return NotFound();
@@ -122,7 +125,7 @@ namespace AsyncInn.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AmenitiesID"] = new SelectList(_context.Amenities, "ID", "ID", roomAmenities.AmenitiesID);
+            ViewData["AmenitiesID"] = new SelectList(_context.Amenities, "ID", "Name", roomAmenities.RoomID);
             ViewData["RoomID"] = new SelectList(_context.Room, "ID", "ID", roomAmenities.RoomID);
             return View(roomAmenities);
         }
