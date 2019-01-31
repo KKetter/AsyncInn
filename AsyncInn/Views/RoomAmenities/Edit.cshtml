@@ -13,25 +13,6 @@
     <div class="col-md-4">
         
         <form asp-action="Edit" asp-controller="RoomAmenities">
-            @*@<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="AmenitiesID" />
-        <input type="hidden" asp-for="RoomID" />
-        <div class="form-group">
-        <table>
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Amenities.ID)
-                    @
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Room.ID)
-                </td>
-            </tr>
-        </table>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-primary" />
-        </div>*@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="AmenitiesID" class="control-label"></label>

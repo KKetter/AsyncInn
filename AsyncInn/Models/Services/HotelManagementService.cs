@@ -38,6 +38,7 @@ namespace AsyncInn.Models.Services
         {
             _context.Hotel.Update(hotel);
             _context.SaveChanges();
+
         }
 
         public void DeleteHotel(int id)

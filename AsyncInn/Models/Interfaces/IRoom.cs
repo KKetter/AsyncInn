@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AsyncInn.Models.Interfaces
 {
     public interface IRoom
     {
+        //Create
+        Task CreateRoom(Room room);
+        //Read
+        Task<Room> GetRoom(int? id);
 
-        //public int ID { get; set; }
-        //[Required]
-        //public string Name { get; set; }
-        //[Required]
-        //[EnumDataType(typeof(Layout))]
-        //public Layout Layout { get; set; }
-
-        ////Navigation
-        //public HotelRoom HotelRoom { get; set; }
-        //public ICollection<RoomAmenities> RoomAmenities { get; set; }
+        Task<IEnumerable<Room>> GetRooms();
+        //Update
+        void UpdateRoom(Room room);
+        //Delete
+        void DeleteRoom(int id);
     }
 }

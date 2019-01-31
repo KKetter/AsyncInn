@@ -47,6 +47,7 @@ namespace AsyncInn.Controllers
         public IActionResult Create()
         {
             ViewData["RoomID"] = new SelectList(_context.Room, "ID", "Name");
+            ViewData["HotelID"] = new SelectList(_context.Hotel, "ID", "ID");
             return View();
         }
 
@@ -63,6 +64,7 @@ namespace AsyncInn.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["HotelID"] = new SelectList(_context.Hotel, "ID", "ID", hotelRoom.HotelID);
             ViewData["RoomID"] = new SelectList(_context.Room, "ID", "ID", hotelRoom.RoomID);
             return View(hotelRoom);
         }
@@ -121,16 +123,17 @@ namespace AsyncInn.Controllers
         }
 
         // GET: HotelRooms/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? hotelID, int? roomID)
         {
-            if (id == null)
+            if (hotelID == null)
             {
                 return NotFound();
             }
 
             var hotelRoom = await _context.HotelRoom
                 .Include(h => h.Room)
-                .FirstOrDefaultAsync(m => m.HotelID == id);
+                .Include(h => h.Hotel)
+                .FirstOrDefaultAsync(m => m.HotelID == hotelID && m.RoomID == roomID);
             if (hotelRoom == null)
             {
                 return NotFound();
@@ -142,9 +145,12 @@ namespace AsyncInn.Controllers
         // POST: HotelRooms/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int roomID, int hotelID)
         {
-            var hotelRoom = await _context.HotelRoom.FindAsync(id);
+            var hotelRoom = await _context.HotelRoom
+                .Include(h => h.Room)
+                .Include(h => h.Hotel)
+                .FirstOrDefaultAsync(m => m.HotelID == hotelID && m.RoomID == roomID);
             _context.HotelRoom.Remove(hotelRoom);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AsyncInn.Models.Interfaces
@@ -9,7 +7,7 @@ namespace AsyncInn.Models.Interfaces
     {
         //Create
         Task CreateHotel(Hotel hotel);
-        //Read
+        //Read - int? is a nullable value
         Task<Hotel> GetHotel(int? id);
 
         Task<IEnumerable<Hotel>> GetHotels();

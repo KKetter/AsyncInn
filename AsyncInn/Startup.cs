@@ -28,6 +28,8 @@ namespace AsyncInn
 
             //add interfaces here
             services.AddScoped<IHotel, HotelManagementService>();
+            services.AddScoped<IRoom, RoomManagementService>();
+            services.AddScoped<IAmenities, AmenityManagementService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -4,22 +4,30 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AsyncInn.Data;
 using AsyncInn.Models;
+using AsyncInn.Models.Interfaces;
 
 namespace AsyncInn.Controllers
 {
     public class AmenitiesController : Controller
     {
-        private readonly AsyncInnDbContext _context;
+        //private readonly AsyncInnDbContext _context;
 
-        public AmenitiesController(AsyncInnDbContext context)
+        //public AmenitiesController(AsyncInnDbContext context)
+        //{
+        //    _context = context;
+        //}
+
+        private readonly IAmenities _context;
+
+        public AmenitiesController(IAmenities amenities)
         {
-            _context = context;
+            _context = amenities;
         }
 
         // GET: Amenities
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Amenities.ToListAsync());
+            return View(await _context.GetAmenities());
         }
 
         // GET: Amenities/Details/5
@@ -30,8 +38,8 @@ namespace AsyncInn.Controllers
                 return NotFound();
             }
 
-            var amenities = await _context.Amenities
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var amenities = await _context.GetAmenities();
+
             if (amenities == null)
             {
                 return NotFound();
@@ -51,12 +59,11 @@ namespace AsyncInn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name")] Amenities amenities)
+        public IActionResult Create([Bind("ID,Name")] Amenities amenities)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(amenities);
-                await _context.SaveChangesAsync();
+                _context.CreateAmenity(amenities);
                 return RedirectToAction(nameof(Index));
             }
             return View(amenities);
@@ -70,7 +77,7 @@ namespace AsyncInn.Controllers
                 return NotFound();
             }
 
-            var amenities = await _context.Amenities.FindAsync(id);
+            var amenities = await _context.GetAmenity(id);
             if (amenities == null)
             {
                 return NotFound();
@@ -83,7 +90,7 @@ namespace AsyncInn.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name")] Amenities amenities)
+        public IActionResult Edit(int id, [Bind("ID,Name")] Amenities amenities)
         {
             if (id != amenities.ID)
             {
@@ -92,22 +99,8 @@ namespace AsyncInn.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(amenities);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AmenitiesExists(amenities.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                
+                _context.UpdateAmenity(amenities);
                 return RedirectToAction(nameof(Index));
             }
             return View(amenities);
@@ -121,8 +114,7 @@ namespace AsyncInn.Controllers
                 return NotFound();
             }
 
-            var amenities = await _context.Amenities
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var amenities = await _context.GetAmenity(id);
             if (amenities == null)
             {
                 return NotFound();
@@ -134,17 +126,10 @@ namespace AsyncInn.Controllers
         // POST: Amenities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var amenities = await _context.Amenities.FindAsync(id);
-            _context.Amenities.Remove(amenities);
-            await _context.SaveChangesAsync();
+            _context.DeleteAmenity(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool AmenitiesExists(int id)
-        {
-            return _context.Amenities.Any(e => e.ID == id);
         }
     }
 }
