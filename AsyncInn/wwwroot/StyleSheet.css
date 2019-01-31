@@ -1,2 +1,13 @@
 ﻿body {
+    background-color: lavender;
+}
+h1{
+    border:dotted;
+    text-align: center;
+}
+table{
+    text-align:center
+}
+.btn-danger{
+    background-color: blueviolet;
 }
