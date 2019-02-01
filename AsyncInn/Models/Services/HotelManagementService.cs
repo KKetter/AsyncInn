@@ -1,5 +1,6 @@
 ﻿using AsyncInn.Data;
 using AsyncInn.Models.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,6 @@ namespace AsyncInn.Models.Services
     {
         private AsyncInnDbContext _context { get; }
 
-        //bring in database
         public HotelManagementService(AsyncInnDbContext context)
         {
             _context = context;
@@ -46,6 +46,17 @@ namespace AsyncInn.Models.Services
             Hotel hotel = _context.Hotel.FirstOrDefault(s => s.ID == id);
             _context.Hotel.Remove(hotel);
             _context.SaveChanges();
+        }
+        //search options starting code - YOU GOT THIS! 
+        public async Task<IEnumerable<Hotel>> SearchHotels(string searchString)
+        {
+            return await _context.Hotel.Where(xx => xx.Address.ToLower() == searchString.ToLower()).ToListAsync();
+        }
+
+        public int CountRooms(int id)
+        {
+            int rooms = _context.HotelRoom.Where(r => r.HotelID == id).Count();
+            return rooms;
         }
     }
 }

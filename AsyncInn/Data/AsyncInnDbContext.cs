@@ -1,4 +1,5 @@
-﻿using AsyncInn.Models;
+﻿using System.Collections.Generic;
+using AsyncInn.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace AsyncInn.Data
@@ -128,5 +129,6 @@ namespace AsyncInn.Data
         public DbSet<Room> Room { get; set; }
         public DbSet<RoomAmenities> RoomAmenities { get; set; }
         public DbSet<Amenities> Amenities { get; set; }
+        public IEnumerable<object> HotelRooms { get; internal set; }
     }
 }

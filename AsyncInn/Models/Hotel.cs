@@ -15,6 +15,9 @@ namespace AsyncInn.Models
         public string Address { get; set; }
         [Required]
         public string Phone { get; set; }
+        
+        public int RoomTotal { get; set; }
+    
 
         //Navigation
         public ICollection<HotelRoom> HotelRoom { get; set; }
