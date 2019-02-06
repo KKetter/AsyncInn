@@ -11,9 +11,12 @@ namespace AsyncInn
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration Configuration)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder().AddEnvironmentVariables();
+            builder.AddUserSecrets<Startup>();
+            Configuration = builder.Build();
+
         }
 
         public IConfiguration Configuration { get; }
@@ -24,7 +27,7 @@ namespace AsyncInn
         {
             services.AddMvc();
 
-            services.AddDbContext<AsyncInnDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AsyncInnDbContext>(options => options.UseSqlServer(Configuration[ "ConnectionStrings:ProductionConnection"]));
 
             //add interfaces here
             services.AddScoped<IHotel, HotelManagementService>();
