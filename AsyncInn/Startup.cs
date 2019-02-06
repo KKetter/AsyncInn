@@ -27,7 +27,8 @@ namespace AsyncInn
         {
             services.AddMvc();
 
-            services.AddDbContext<AsyncInnDbContext>(options => options.UseSqlServer(Configuration[ "ConnectionStrings:ProductionConnection"]));
+            services.AddDbContext<AsyncInnDbContext>(options => 
+            options.UseSqlServer(Configuration["DefaultConnection"]));
 
             //add interfaces here
             services.AddScoped<IHotel, HotelManagementService>();

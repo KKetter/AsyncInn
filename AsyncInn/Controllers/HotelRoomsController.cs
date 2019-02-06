@@ -5,16 +5,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AsyncInn.Data;
 using AsyncInn.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace AsyncInn.Controllers
 {
     public class HotelRoomsController : Controller
     {
         private readonly AsyncInnDbContext _context;
+        private readonly IConfiguration Configuration;
 
-        public HotelRoomsController(AsyncInnDbContext context)
+        public HotelRoomsController(AsyncInnDbContext context, IConfiguration configuration)
         {
             _context = context;
+            Configuration = configuration;
         }
 
         // GET: HotelRooms
